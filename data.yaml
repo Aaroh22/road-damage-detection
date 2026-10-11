@@ -5,7 +5,7 @@ val: images/val
 test: images/test
 
 names:
-  0: D00
-  1: D10
-  2: D20
-  3: D40
+  0: Longitudinal Crack
+  1: Transverse Crack
+  2: Alligator Crack
+  3: Pothole
