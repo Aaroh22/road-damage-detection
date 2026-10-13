@@ -1,2 +1,13 @@
 data/
 .DS_Store
+
+.venv/
+.venv-1/
+__pycache__/
+*.pyc
+
+runs/
+*.pt
+main_split.zip
+
+data_temp.yaml
