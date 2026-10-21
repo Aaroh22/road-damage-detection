@@ -30,6 +30,25 @@ def prepare_data_yaml():
 
 
 def main():
+    # Lets me resume an interrupeted training run
+    RESUME = False
+
+    if RESUME:
+        checkpoint = (
+            project_root / "runs"
+            / "YOLO26s_baseline_model"
+            / "weights" / "last.pt"
+        )
+
+        if not checkpoint.is_file():
+            raise FileNotFoundError(f"Checkpoint not found: {checkpoint}")
+
+        print(f"Resuming training from {checkpoint}")
+        model = YOLO(str(checkpoint))
+        return model.train(resume=True)
+
+    print("Starting a new training run.")
+    
     data_temp_yaml = prepare_data_yaml()
 
     # Add the baseline model : for the baseline model i am choosing s model(small).
