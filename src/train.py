@@ -43,11 +43,11 @@ def main():
         if not checkpoint.is_file():
             raise FileNotFoundError(f"Checkpoint not found: {checkpoint}")
 
-            data_temp_yaml = prepare_data_yaml()
+        data_temp_yaml = prepare_data_yaml()
 
-            print(f"Resuming training from {checkpoint}")
-            model = YOLO(str(checkpoint))
-            return model.train(resume=True, data=str(data_temp_yaml))
+        print(f"Resuming training from {checkpoint}")
+        model = YOLO(str(checkpoint))
+        return model.train(resume=True, data=str(data_temp_yaml))
 
     print("Starting a new training run.")
     
