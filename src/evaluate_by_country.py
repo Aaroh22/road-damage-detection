@@ -11,8 +11,8 @@ domains = [
 ]
 
 # Evaluate our trained YOLO model separately on each of the 7 RDD2022 domains (evaluation by countries).
-# For each domain, create a list of its validation images and a YAML file
-# telling YOLO to use only those images.
+# For each domain, create a .txt file containing the list of its validation image paths
+# and a YAML file telling YOLO to use only those images.
 # Calculate precision, recall, and mAP, seperately for each country then save all results in one CSV.
 # No model training happens here.
 
