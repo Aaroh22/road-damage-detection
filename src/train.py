@@ -28,6 +28,7 @@ def prepare_data_yaml():
 
     return data_temp_yaml
 
+# Baseline Model
 
 def main():
     # Lets me resume an interrupeted training run

@@ -21,12 +21,7 @@ def main():
         imgsz=640,
         batch=8,
         device=0,
-        workers=8,
         seed=42,
-        optimizer="auto",
-        close_mosaic=10,
-        val=True,
-        plots=True,
         project=str(project_root / "runs"),
         name="YOLO26m_full50"
     )
