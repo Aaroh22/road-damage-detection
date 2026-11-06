@@ -11,7 +11,7 @@ from ultralytics import YOLO
 from train import prepare_data_yaml, project_root
 
 
-RUN_NAME = "YOLO26s_norway_crops_ft10"
+RUN_NAME = "YOLO26s_norway_crops_ft25"
 RESUME = False
 
 
@@ -81,7 +81,8 @@ def main():
 
     return model.train(
         data=str(experiment_yaml),
-        epochs=10,
+        epochs=25,
+        close_mosaic=25,
         imgsz=640,
         batch=8,
         device=0,
