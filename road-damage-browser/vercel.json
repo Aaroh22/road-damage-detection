@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "headers": [
+    {"source": "/model.onnx", "headers": [{"key":"Content-Type","value":"application/octet-stream"}]},
+    {"source": "/ort-wasm-simd-threaded.wasm", "headers": [{"key":"Content-Type","value":"application/wasm"}]}
+  ]
+}
