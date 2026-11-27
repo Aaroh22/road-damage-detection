@@ -20,4 +20,4 @@ RUN mkdir -p weights \
        -o weights/road_damage_yolo26s.pt \
     && echo "2304871205864929cfbb86739fe0867021e56de456d33b30f99c0f1fa6ab8f27  weights/road_damage_yolo26s.pt" | sha256sum -c -
 
-CMD ["sh", "-c", "exec python app.py --host 0.0.0.0 --port ${PORT:-8501}"]d
+CMD ["sh", "-c", "exec python app.py --host 0.0.0.0 --port ${PORT:-8501}"]
