@@ -87,12 +87,21 @@ def copy_pairs(pairs, split_name):
         )
 
 if __name__ == "__main__":
-    
+
     # Keep an existing split safe if the script is run again.
     if SPLIT_DIR.exists():
         raise FileExistsError(
             f"Split folder already exists: {SPLIT_DIR}. No files were changed."
         )
+
+    for country_dir in sorted(RAW_DIR.iterdir()):
+        if country_dir.is_dir():
+            label_dir = LABEL_DIR / country_dir.name / "labels"
+            if not any(label_dir.glob("*.txt")):
+                raise FileNotFoundError(
+                    f"No labels found for {country_dir.name}. "
+                    "Run src/convert_to_yolo.py first."
+                )
 
     total_train = 0
     total_val = 0
