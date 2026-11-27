@@ -11,3 +11,5 @@ runs/
 main_split.zip
 
 data_temp.yaml
+data_neg10_temp.yaml
+data_norway_crops_temp.yaml

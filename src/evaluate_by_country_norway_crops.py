@@ -34,7 +34,7 @@ def main():
 
     checkpoint = (
         project_root
-        / "runs/YOLO26s_norway_crops_ft10/weights/best.pt"
+        / "runs/YOLO26s_norway_crops_ft25/weights/best.pt"
     )
 
     if not checkpoint.is_file():

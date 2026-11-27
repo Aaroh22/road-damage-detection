@@ -6,10 +6,10 @@ from pathlib import Path
 import random
 import shutil
 
-RAW_DIR = Path("data/raw/RDD2022")
-LABEL_DIR = Path("data/processed/RDD2022_YOLO")
-
-SPLIT_DIR = Path("data/processed/main_split")
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+RAW_DIR = PROJECT_DIR / "data" / "raw" / "RDD2022"
+LABEL_DIR = PROJECT_DIR / "data" / "processed" / "RDD2022_YOLO"
+SPLIT_DIR = PROJECT_DIR / "data" / "processed" / "main_split"
 
 TRAIN_RATIO = 0.80
 VAL_RATIO = 0.10
@@ -86,60 +86,64 @@ def copy_pairs(pairs, split_name):
             label_output_dir / label_path.name
         )
 
-# Remove an old split before creating a fresh one
-if SPLIT_DIR.exists():
-    shutil.rmtree(SPLIT_DIR)
+if __name__ == "__main__":
+    
+    # Keep an existing split safe if the script is run again.
+    if SPLIT_DIR.exists():
+        raise FileExistsError(
+            f"Split folder already exists: {SPLIT_DIR}. No files were changed."
+        )
 
-total_train = 0
-total_val = 0
-total_test = 0
+    total_train = 0
+    total_val = 0
+    total_test = 0
 
-# For each country run the above 3 functions and print the counts
+    # For each country run the above 3 functions and print the counts
 
-for country_dir in sorted(RAW_DIR.iterdir()):
+    for country_dir in sorted(RAW_DIR.iterdir()):
 
-    if not country_dir.is_dir():
-        continue
+        if not country_dir.is_dir():
+            continue
 
-    country_name = country_dir.name
+        country_name = country_dir.name
 
-    pairs = get_image_label_pairs(country_name)
+        pairs = get_image_label_pairs(country_name)
 
-    train_pairs, val_pairs, test_pairs = split_pairs(pairs)
+        train_pairs, val_pairs, test_pairs = split_pairs(pairs)
 
-    copy_pairs(train_pairs, "train")
-    copy_pairs(val_pairs, "val")
-    copy_pairs(test_pairs, "test")
+        copy_pairs(train_pairs, "train")
+        copy_pairs(val_pairs, "val")
+        copy_pairs(test_pairs, "test")
 
-    total_train += len(train_pairs)
-    total_val += len(val_pairs)
-    total_test += len(test_pairs)
+        total_train += len(train_pairs)
+        total_val += len(val_pairs)
+        total_test += len(test_pairs)
 
-    print(
-        f"{country_name}: "
-        f"train={len(train_pairs)}, "
-        f"val={len(val_pairs)}, "
-        f"test={len(test_pairs)}"
-    )
+        print(
+            f"{country_name}: "
+            f"train={len(train_pairs)}, "
+            f"val={len(val_pairs)}, "
+            f"test={len(test_pairs)}"
+        )
 
-print("\nFinal split:")
-print("Train:", total_train)
-print("Validation:", total_val)
-print("Test:", total_test)
-print("Total:", total_train + total_val + total_test)
+    print("\nFinal split:")
+    print("Train:", total_train)
+    print("Validation:", total_val)
+    print("Test:", total_test)
+    print("Total:", total_train + total_val + total_test)
 
-# Check that each image has a matching label in every split.
-# Print the counts and report any missing images or labels.
+    # Check that each image has a matching label in every split.
+    # Print the counts and report any missing images or labels.
 
-for split_name in ("train", "val", "test"):
-    image_dir = SPLIT_DIR / "images" / split_name
-    label_dir = SPLIT_DIR / "labels" / split_name
+    for split_name in ("train", "val", "test"):
+        image_dir = SPLIT_DIR / "images" / split_name
+        label_dir = SPLIT_DIR / "labels" / split_name
 
-    image_stems = {path.stem for path in image_dir.iterdir()}
-    label_stems = {path.stem for path in label_dir.glob("*.txt")}
+        image_stems = {path.stem for path in image_dir.iterdir()}
+        label_stems = {path.stem for path in label_dir.glob("*.txt")}
 
-    print(f"\n{split_name.upper()}")
-    print("Images:", len(image_stems))
-    print("Labels:", len(label_stems))
-    print("Missing labels:", len(image_stems - label_stems))
-    print("Missing images:", len(label_stems - image_stems))
+        print(f"\n{split_name.upper()}")
+        print("Images:", len(image_stems))
+        print("Labels:", len(label_stems))
+        print("Missing labels:", len(image_stems - label_stems))
+        print("Missing images:", len(label_stems - image_stems))

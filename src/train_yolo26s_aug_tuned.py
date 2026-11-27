@@ -13,7 +13,7 @@ def main():
         checkpoint = (
             project_root
             / "runs"
-            / "YOLO26s_augmented_full50"
+            / "YOLO26s_augmentation_tuned_full50"
             / "weights"
             / "last.pt"
         )

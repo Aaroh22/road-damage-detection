@@ -1,0 +1,24 @@
+{
+  "model": "YOLO26s",
+  "weights_sha256": "2304871205864929cfbb86739fe0867021e56de456d33b30f99c0f1fa6ab8f27",
+  "ultralytics": "8.4.204",
+  "split": "test",
+  "images": 3846,
+  "imgsz": 640,
+  "map50_pct": 60.06,
+  "map50_95_pct": 31.42,
+  "per_class_ap50_95_pct": {
+    "Longitudinal Crack": 33.04,
+    "Transverse Crack": 29.9,
+    "Alligator Crack": 38.12,
+    "Pothole": 24.63
+  },
+  "demo_at_conf_0.25_iou_0.50": {
+    "correct": 2908,
+    "false_alarms": 1287,
+    "missed": 2674,
+    "precision_pct": 69.32,
+    "recall_pct": 52.1,
+    "f1": 0.5949
+  }
+}
